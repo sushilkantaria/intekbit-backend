@@ -11,7 +11,7 @@ function Dashboard() {
 
   const fetchBlogs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/blogs");
+      const res = await axios.get("https://intekbit-backend.onrender.com/api/blogs");
       setBlogs(res.data.blogs); // ✅ correct
     } catch (err) {
       console.error("Error fetching blogs:", err);
@@ -21,7 +21,7 @@ function Dashboard() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this blog?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/blog/${id}`);
+        await axios.delete(`https://intekbit-backend.onrender.com/api/blog/${id}`);
         setBlogs((prev) => prev.filter((blog) => blog._id !== id));
       } catch (err) {
         console.error("Error deleting blog:", err);
