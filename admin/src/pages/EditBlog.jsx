@@ -9,12 +9,12 @@ function EditBlog() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/blog/${id}`).then((res) => setBlog(res.data.blog));
+    axios.get(`https://intekbit-backend.onrender.com/api/blog/${id}`).then((res) => setBlog(res.data.blog));
   }, [id]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:5000/api/blog/${id}`, blog);
+    await axios.put(`https://intekbit-backend.onrender.com/api/blog/${id}`, blog);
     navigate("/");
   };
 
