@@ -15,7 +15,7 @@ function CreateBlog() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/addblogs", blog);
+      await axios.post("https://intekbit-backend.onrender.com/api/addblogs", blog);
       navigate("/");
     } catch (err) {
       console.error("Error creating blog:", err);
