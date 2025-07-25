@@ -16,14 +16,14 @@ function BlogForm({ blog, setBlog, handleSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl mx-auto bg-white p-6 rounded shadow">
+    <form onSubmit={handleSubmit} className="space-y-6 w-full mx-auto">
       {/* Title */}
       <input
         type="text"
         placeholder="Enter blog title"
         value={blog.title}
         onChange={(e) => setBlog({ ...blog, title: e.target.value })}
-        className="w-full p-3 border rounded"
+        className="w-full p-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:border-purple-400 text-lg"
         required
       />
 
@@ -32,32 +32,33 @@ function BlogForm({ blog, setBlog, handleSubmit }) {
         type="file"
         accept="image/*"
         onChange={handleImageChange}
-        className="w-full p-2 border rounded"
+        className="w-full p-2 border-2 border-purple-200 rounded-xl focus:outline-none focus:border-purple-400"
         required
       />
       {/* Image Preview Container */}
-{blog.image && (
-  <div className="inline-block border rounded p-1 w-fit">
-    <img
-      src={blog.image}
-      alt="Preview"
-      className="max-w-[100px] max-h-[100px] object-cover rounded"
-    />
-  </div>
-)}
-
+      {blog.image && (
+        <div className="inline-block border-2 border-purple-200 rounded-xl p-2 w-fit bg-purple-50">
+          <img
+            src={blog.image}
+            alt="Preview"
+            className="max-w-[120px] max-h-[120px] object-cover rounded-xl shadow"
+          />
+        </div>
+      )}
 
       {/* Description (Rich text) */}
-      <JoditEditor
-        ref={editor}
-        value={blog.description}
-        onBlur={(newContent) => setBlog({ ...blog, description: newContent })}
-      />
+      <div className="border-2 border-purple-200 rounded-xl bg-purple-50">
+        <JoditEditor
+          ref={editor}
+          value={blog.description}
+          onBlur={(newContent) => setBlog({ ...blog, description: newContent })}
+        />
+      </div>
 
       {/* Submit */}
       <button
         type="submit"
-        className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+        className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-3 rounded-xl shadow font-bold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 border border-blue-300"
       >
         Save Blog
       </button>
