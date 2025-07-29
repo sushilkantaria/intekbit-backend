@@ -1,8 +1,5 @@
-import { useRef } from "react";
-import JoditEditor from "jodit-react";
-
 function BlogForm({ blog, setBlog, handleSubmit }) {
-  const editor = useRef(null);
+  // Removed JoditEditor, using textarea instead
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -46,14 +43,14 @@ function BlogForm({ blog, setBlog, handleSubmit }) {
         </div>
       )}
 
-      {/* Description (Rich text) */}
-      <div className="border-2 border-purple-200 rounded-xl bg-purple-50">
-        <JoditEditor
-          ref={editor}
-          value={blog.description}
-          onBlur={(newContent) => setBlog({ ...blog, description: newContent })}
-        />
-      </div>
+      {/* Description (Simple textarea) */}
+      <textarea
+        placeholder="Enter blog description"
+        value={blog.description}
+        onChange={(e) => setBlog({ ...blog, description: e.target.value })}
+        className="w-full p-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:border-purple-400 text-lg min-h-[120px] bg-purple-50"
+        required
+      />
 
       {/* Submit */}
       <button
