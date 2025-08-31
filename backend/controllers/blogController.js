@@ -96,9 +96,11 @@
 
 
 // controllers/blogController.js
+
 const fs = require('fs');
 const path = require('path');
 const Blog = require('../models/blog');
+const { uploadOnCloudinary } = require('../cloudinary');
 
 // ---- SAME uploads dir ----
 const UPLOADS_DIR = process.env.UPLOADS_DIR || path.join(__dirname, '..', 'uploads');
@@ -130,7 +132,13 @@ exports.createBlog = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Title, description, and image are required' });
     }
 
-    const image = `/uploads/${req.file.filename}`;
+    // Upload to Cloudinary
+    const localFilePath = req.file.path;
+    const cloudinaryResult = await uploadOnCloudinary(localFilePath);
+    if (!cloudinaryResult || !cloudinaryResult.secure_url) {
+      return res.status(500).json({ success: false, message: 'Image upload to Cloudinary failed' });
+    }
+    const image = cloudinaryResult.secure_url;
     const newBlog = new Blog({ title, image, description });
     await newBlog.save();
 
